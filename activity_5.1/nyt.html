@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+</head>
+
+<body>
+    <script>
+      let apiEndPoint = 'https://api.nytimes.com/svc/search/v2/articlesearch.json?q=Chicago&api-key=l4TaX4wafpJ0237rMRRx3MSEFSoeWfAF';
+
+      fetch(apiEndPoint)
+      .then(res => {return res.json()})
+      .then(json => {
+          for (var i = 0; i < json.response.docs.length; i++) {
+              //console.log(json.response.docs[i].headline.main);
+              let p1 = document.createElement("p");
+              p1.textContent = json.response.docs[i].headline.main;
+              document.body.append(p1);
+          }
+          
+//       let h1 = document.createElement("h1");
+//       h1.textContent = json.title;
+//       document.body.append(h1);
+        
+//       let p1 = document.createElement("p");
+//       p1.textContent = json.date;
+//       document.body.append(p1);
+      
+//       let p2 = document.createElement("p");
+//       p2.textContent = json.explanation;
+//       document.body.append(p2);
+        
+//       let img = document.createElement("img");
+//       img.src = json.hdurl;
+//       img.setAttribute("style", "height: 50%; width: 50%;");
+      
+//       document.body.append(img);
+      })
+      .catch(err => alert(err))
+    </script>
+</body>
+
+</html>

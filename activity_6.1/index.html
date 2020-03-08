@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>repl.it</title>
+
+
+    <!-- Include dexie.js -->
+    <script src="https://unpkg.com/dexie@latest/dist/dexie.js"></script>
+</head>
+
+<body>
+    <script>
+        //"
+         // Define database
+         //
+        var db = new Dexie("MyFriendDB");
+        db.version(1).stores({
+            friends: '++id,name,age',
+            enemies: '++id, name'
+        });
+        //log("Using Dexie v" + Dexie.semVer);
+        
+         //
+         // Query Database
+         //
+//         db.friends.add({
+//             name: "Foo",
+//             age: 42,
+//             hometown: "Chicago"
+//         });
+        
+        db.friends.where("age").equals(42).toArray().then( data => console.log(data));
+    </script>
+
+    
+</body>
+
+</html>

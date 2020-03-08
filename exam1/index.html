@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link href="styles.css" rel="stylesheet" type="text/css" />
+    
+    <style>
+      body {font-family: Verdana, Arial, sans-serif;}
+      .headline {font-weight: bold;}
+      .subhead {font-size: .8rem}
+      ol li {margin-bottom: 1rem}
+    </style>
+    
+</head>
+
+<body>
+    <!-- Q8 -->
+    <div class="legal">
+        Q8
+    </div>
+    
+    <!-- Q10 -->
+    <a href="http://uic.edu/">UIC</a>
+
+    <a href="https://www.uic.edu">UIC</a>
+    
+    <!-- Q21 -->
+    <h1>Exam 1 Starter</h1>
+    
+    <hr>
+    <div class="template">
+      <div class="headline"> 
+        headline
+      </div>
+      <div class="subhead">
+        subhead1
+      </div>
+    </div>
+    
+    
+    <script>
+        //#18
+      document.querySelector("h1").innerHTML = "672099973"
+
+      //#19
+      document.querySelector("h1").addEventListener("click", () => {
+        document.querySelector("h1").setAttribute("style", "color: green;")
+      });
+
+      //#20
+      let apiEndPoint = 'https://data.cityofchicago.org/resource/x8fc-8rcq.json';
+
+      fetch(apiEndPoint)
+      .then(res => {return res.json()})
+      .then(json => {
+          for (let i = 0; i < json.length; i++) {
+            // console.log(json[i].name_);
+            let p = document.createElement("p");
+            p.textContent = json[i].name_;
+            document.body.append(p);
+          }
+      })
+
+      //#21
+      fetch(apiEndPoint)
+      .then(res => {return res.json()})
+      .then(json => {
+          for (let i = 0; i < json.length; i++) {
+            if(json[i].zip == 60617) {
+              var temp = document.querySelector(".template");
+              var cln = temp.cloneNode(true);
+              cln.childNodes[1].innerHTML = json[i].name_;
+//               cln.childNodes[1].childNodes[2].innerHTML = json[i].address;
+              console.log(json[i].address);
+                
+              document.body.appendChild(cln);
+            } 
+          }
+      })
+      .catch(err => alert(err))
+    
+    </script>
+</body>
+
+</html>
