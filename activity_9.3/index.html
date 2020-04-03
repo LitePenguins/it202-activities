@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title>Activity 9.3</title>
+    <link href="https://unpkg.com/material-components-web@v4.0.0/dist/material-components-web.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/material-components-web@v4.0.0/dist/material-components-web.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <style>
+    </style>
+</head>
+
+<body>
+    <button class="mdc-button mdc-button--raised" id="graf">
+        <span class="mdc-button__ripple"></span> GRAF
+    </button>
+    <button class="mdc-button mdc-button--raised" id="sfd">
+        <span class="mdc-button__ripple"></span> SFD
+    </button>
+    <button class="mdc-button mdc-button--raised" id="csf">
+        <span class="mdc-button__ripple"></span> CSF
+    </button>
+    <ul class="mdc-list mdc-list--two-line">
+      <li class="mdc-list-item" tabindex="0">
+        <span class="mdc-list-item__text">
+          <span class="mdc-list-item__primary-text">Two-line item</span>
+          <span class="mdc-list-item__secondary-text">Secondary text</span>
+        </span>
+      </li>
+      <li class="mdc-list-item">
+        <span class="mdc-list-item__text">
+          <span class="mdc-list-item__primary-text">Two-line item</span>
+          <span class="mdc-list-item__secondary-text">Secondary text</span>
+        </span>
+      </li>
+      <li class="mdc-list-item">
+        <span class="mdc-list-item__text">
+          <span class="mdc-list-item__primary-text">Two-line item</span>
+          <span class="mdc-list-item__secondary-text">Secondary text</span>
+        </span>
+      </li>
+    </ul>
+    <script>
+        mdc.ripple.MDCRipple.attachTo(document.querySelector('.mdc-button--raised'));
+         //https://data.cityofchicago.org/resource/v6vf-nfxy.json?sr_short_code=GRAF&$LIMIT=5
+         //https://data.cityofchicago.org/resource/v6vf-nfxy.json?sr_short_code=SFD&$LIMIT=5
+         //https://data.cityofchicago.org/resource/v6vf-nfxy.json?sr_short_code=CSF&$LIMIT=5
+        document.querySelector("#graf").addEventListener("click", () => {
+            let apiEndPoint = 'https://data.cityofchicago.org/resource/v6vf-nfxy.json?sr_short_code=GRAF&$LIMIT=5';
+            fetch(apiEndPoint).then(res => {
+                return res.json()
+            }).then(json => {
+                const myNode = document.querySelector(".mdc-list");
+                myNode.innerHTML = '';
+                
+                for(var val in json) {
+                        console.log(json[val].sr_number)
+                        let node = document.createElement('li');
+                        node.textContent = "GRAF address: " + json[val].street_number + json[val].street_name + json[val].street_direction +json[val].street_type;   
+                        node.className = 'mdc-list-item';
+                        document.querySelector('.mdc-list').appendChild(node);     
+                }
+            }).
+            catch(err => alert(err))
+        });
+        
+        document.querySelector("#sfd").addEventListener("click", () => {
+            let apiEndPoint = 'https://data.cityofchicago.org/resource/v6vf-nfxy.json?sr_short_code=SFD&$LIMIT=5';
+            fetch(apiEndPoint).then(res => {
+                return res.json()
+            }).then(json => {
+                const myNode = document.querySelector(".mdc-list");
+                myNode.innerHTML = '';
+                
+                for(var val in json) {
+                        console.log(json[val].sr_number)
+                        let node = document.createElement('li');
+                        node.textContent = json[val].sr_number;   
+                        node.className = 'mdc-list-item';
+                        document.querySelector('.mdc-list').appendChild(node);     
+                }
+            }).
+            catch(err => alert(err))
+        });
+        
+        document.querySelector("#csf").addEventListener("click", () => {
+            let apiEndPoint = 'https://data.cityofchicago.org/resource/v6vf-nfxy.json?sr_short_code=CSF&$LIMIT=5';
+            fetch(apiEndPoint).then(res => {
+                return res.json()
+            }).then(json => {
+                const myNode = document.querySelector(".mdc-list");
+                myNode.innerHTML = '';
+                
+                for(var val in json) {
+                        console.log(json[val].sr_number)
+                        let node = document.createElement('li');
+                        node.textContent = json[val].sr_number;   
+                        node.className = 'mdc-list-item';
+                        document.querySelector('.mdc-list').appendChild(node);     
+                }
+            }).
+            catch(err => alert(err))
+        });
+    </script>
+</body>
+
+</html>
